@@ -1,0 +1,6 @@
+transition(initializing, idle, "after 10s", null, null).
+transition(idle, configuring, configure, "T_threshold not null", null).
+transition(configuring, idle, done, "T_threshold > T_current", "Short Beep").
+transition(configuring, idle, cancel, null, "Long Beep; T_threshold := T_threshold@pre").
+transition(reading, emergency, "When T_current >= T_threshold OR CO_current >= CO_threshold", null, "Send Notification").
+transition(emergency, reading, reset, null, null).
